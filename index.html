@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="YourName">
+    <title>HAHA</title>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet"> <!-- Include Animate.css -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align content to top */
+            overflow: hidden;
+            font-family: 'Calibri', sans-serif; /* Set font to Calibri */
+            position: relative; /* For other positioned elements */
+            user-select: none; /* Disable text selection */
+        }
+
+        .girl-container {
+            position: absolute;
+            top: 0; /* Align to the top */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .girl-image {
+            max-width: 300px; /* Increased size of the image */
+            width: 100%;
+            animation: swing 4s ease-in-out infinite; /* Apply animation */
+            filter: grayscale(100%); /* Make the image black and white */
+        }
+
+        .text {
+            position: absolute;
+            bottom: 40px; /* Adjust the bottom positioning */
+            color: white;
+            font-size: 30px; /* Increased font size */
+            text-align: center;
+            width: 100%;
+        }
+
+        .small-text {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #bbb;
+            font-size: 12px;
+            font-family: 'Calibri', sans-serif; /* Ensure the same font */
+        }
+
+        /* Keyframes for swinging effect */
+        @keyframes swing {
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(10deg);
+            }
+            50% {
+                transform: rotate(0deg);
+            }
+            75% {
+                transform: rotate(-10deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        /* Disable right-click */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* Overlay style to block the entire page */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: white;
+            z-index: 9999;
+            cursor: pointer; /* Make the overlay clickable */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="deadinside.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- The Girl Image Container -->
+    <div class="girl-container">
+        <img src="image.png" alt="Girl" class="girl-image animate__animated animate__swing">
+    </div>
+
+    <!-- Text at the Bottom -->
+    <div class="text">
+        <p>Wizkna</p>
+    </div>
+
+    <!-- Small Text in Top Right Corner -->
+    <div class="small-text">
+        <p>*Website not associated with vile.sh</p>
+    </div>
+
+    <!-- Overlay to Click to Enter -->
+    <div id="overlay">
+        <p>Click to Enter</p>
+    </div>
+
+    <script>
+        // Audio play on click to overcome autoplay restrictions
+        const audio = document.getElementById("background-music");
+        const overlay = document.getElementById("overlay");
+
+        document.body.addEventListener("click", () => {
+            // Only trigger if the overlay is still visible
+            if (overlay.style.display !== "none") {
+                audio.play();
+                overlay.style.animation = "fadeOut 1s forwards"; // Fade out animation on click
+                setTimeout(() => {
+                    overlay.style.display = "none"; // Hide the overlay after the fade-out
+                }, 1000); // Wait for the fade-out to complete before hiding
+                console.log("Audio started playing");
+            }
+        });
+
+        // Prevent right-click and opening developer tools
+        document.addEventListener("contextmenu", (e) => e.preventDefault()); // Disable right-click
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "F12" || (e.ctrlKey && (e.key === "Shift" || e.key === "I" || e.key === "C"))) {
+                e.preventDefault(); // Disable F12 and other dev tools shortcuts
+            }
+        });
+
+        // Keyframe for the fade-out animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeOut {
+                0% { opacity: 1; }
+                100% { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+/* Reset CSS for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body setup */
+body {
+    background-color: #121212; /* Dark background like vile.sh */
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the top */
+    overflow: hidden;
+    color: white;
+    position: relative;
+    text-align: center;
+}
+
+/* Content wrapper */
+.content {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Girl Animation (image swinging effect) */
+.girl-animation {
+    width: 60vw; /* Adjust width to fit the image */
+    max-width: 800px; /* Ensure image doesn't get too big */
+    height: auto;
+    background-image: url('image.png'); /* Ensure the image path is correct */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; /* Preserve aspect ratio */
+    animation: swing 10s ease-in-out infinite; /* Swing animation */
+    position: absolute;
+    top: 5vh; /* Position near the top of the screen */
+    left: 50%; /* Center the image horizontally */
+    transform: translateX(-50%); /* Exact centering */
+}
+
+/* Swing Animation */
+@keyframes swing {
+    0% {
+        transform: translateX(-50px) translateY(0);
+    }
+    25% {
+        transform: translateX(50px) translateY(-40px);
+    }
+    50% {
+        transform: translateX(0) translateY(0);
+    }
+    75% {
+        transform: translateX(-50px) translateY(-40px);
+    }
+    100% {
+        transform: translateX(50px) translateY(0);
+    }
+}
+
+/* Text Content */
+.text {
+    position: absolute;
+    bottom: 10%; /* Move text to the bottom */
+    width: 100%;
+    font-size: 24px;
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.text p {
+    font-size: 1.5rem;
+    font-weight: lighter;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .girl-animation {
+        width: 80vw;
+    }
+
+    .text h1 {
+        font-size: 2rem;
+    }
+
+    .text p {
+        font-size: 1.2rem;
+    }
+}
