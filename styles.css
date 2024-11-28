@@ -1,0 +1,104 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Disclaimer text */
+.disclaimer {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #bbb;
+    font-size: 14px;
+}
+
+/* Image container and animation */
+.image-container {
+    margin-top: 32px;
+    width: 300px;
+}
+
+.swing-image {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    animation: swing 4s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes swing {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Bottom content */
+.bottom-content {
+    position: fixed;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.title {
+    color: white;
+    font-size: 30px;
+}
+
+.music-icon {
+    color: rgba(255, 255, 255, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 50;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-text {
+    color: white;
+    font-size: 30px;
+    animation: scale 2s infinite ease-in-out;
+}
+
+@keyframes scale {
+    0%, 100% { transform: scale(0.9); }
+    50% { transform: scale(1); }
+}
