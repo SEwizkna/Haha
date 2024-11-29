@@ -1,23 +1,39 @@
-// Prevent right-click
-document.addEventListener('contextmenu', (e) => e.preventDefault());
+// Website template by https://github.com/Pathetic420
+document.addEventListener('DOMContentLoaded', function() {
+    var clickToEnter = document.getElementById('click-to-enter');
+    var background = document.querySelector('.background');
+    var video = document.querySelector('video');
+    var audio = document.querySelector('audio');
+    var muteButton = document.getElementById('mute-button');
 
-// Prevent developer tools shortcuts
-document.addEventListener('keydown', (e) => {
-    if (
-        e.key === 'F12' ||
-        (e.ctrlKey && (e.key === 'Shift' || e.key === 'I' || e.key === 'C'))
-    ) {
-        e.preventDefault();
-    }
-});
+    clickToEnter.addEventListener('click', function() {
+        clickToEnter.style.display = 'none';
+        background.style.display = 'block';
+    });
 
-// Handle overlay and audio
-const overlay = document.getElementById('overlay');
-const backgroundMusic = document.getElementById('backgroundMusic');
+    const startPlayback = () => {
+        if (video) video.play();
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                audio.loop = true;
+                audio.volume = 0.2;
+                document.removeEventListener('click', startPlayback);
+            }).catch(error => {
+                console.log('Autoplay was prevented:', error);
+            });
+        }
+    };
 
-overlay.addEventListener('click', () => {
-    overlay.classList.add('hidden');
-    backgroundMusic.play().catch(error => {
-        console.error('Audio playback failed:', error);
+    document.addEventListener('click', startPlayback);
+
+    muteButton.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            muteButton.classList.remove('muted');
+        } else {
+            audio.pause();
+            muteButton.classList.add('muted');
+        }
     });
 });
